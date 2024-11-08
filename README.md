@@ -292,7 +292,7 @@ Secara keseluruhan, model menunjukkan performa yang sangat baik dalam memprediks
 
 #### 2. Model Logistic Regression
 
-<img src="gambar/result_main_lr.png" alt="Metrik Evaluasi Logistic Regression dengan Data Asli"/>
+<img src="gambar/result_main_lr2.png" alt="Metrik Evaluasi Logistic Regression dengan Data Asli"/>
 <figcaption>Gambar 2.1: Metrik evaluasi Logistic Regression dengan data asli.</figcaption>
 <br><br>
 
