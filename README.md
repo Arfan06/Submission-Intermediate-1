@@ -78,7 +78,7 @@ Rata-rata skor kredit pelanggan adalah 650, yang relatif baik, sementara rata-ra
 
 ### Univariate Analysis
 
-# Boxplot.img ===
+# <img src = "gambar/Box Plot Univariate.png"/> <br>
 
 Berdasarkan hasil identifikasi outlier menggunakan boxplot, tidak ditemukan adanya outlier dan memang dianggap sebagai anomali yang sah dalam sebaran data. Berikut keterangan pada masing-masing fitur:
 
@@ -86,25 +86,25 @@ Berdasarkan hasil identifikasi outlier menggunakan boxplot, tidak ditemukan adan
 * Age: Outlier pada kolom Age dianggap normal karena usia customer berada pada rentang yang dianggap normal sebagai usia manusia.
 * Balance: Tidak ditemukan adanya outlier, namun kemungkinan besar data memiliki nilai rendah yang cukup dominan, sehingga distribusi data menjadi tidak normal dan mendorong box plot mendekati nilai minimum.
 
-# Geography.img ===
+# <img src = "gambar/Geography.png"/> <br>
 
 Jumlah nasabah berkewarganegaraan Prancis mendominasi keseluruhan jumlah customer, yaitu sebanyak 50,14%. Sedangkan untuk Jerman dan Spanyol memiliki jumlah persentase yang hampir sama, yaitu sekitar 25%.
 
-# Card_type.img ===
+# <img src = "gambar/Card_type.png"/> <br>
 
 Pada masing-masing tipe kartu memiliki besaran data yang seimbang di range sekitar 25% atau sekitar 2500 pengguna per-tipe kartu.
 
-# Gender.img ===
+# <img src = "gambar/Gender.png"/> <br>
 
 Pengguna dengan jenis kelamin laki-laki mendominasi sebesar 54,57% dan pengguna dengan jenis kelamin perempuan sebesar 45,43%.
 
 ### Multivariate Analysis
 
-# Pairplot.img ===
+# <img src = "gambar/Pairplot.png"/> <br>
 
 Dari hasil analisis menggunakan pairplot, fitur seperti NumOfProducts, Age, dan Balance masih menunjukkan perbedaan yang berarti antara pelanggan yang churn dan yang tidak churn. Fitur Complain menambah perspektif, karena pelanggan dengan keluhan lebih mungkin untuk churn, terutama jika keluhan tersebut berhubungan dengan faktor kepuasan.
 
-# Heatmap.img ===
+# <img src = "gambar/Heatmap.png"/> <br>
 
 Heatmap di atas menunjukkan matriks korelasi antara berbagai fitur dalam dataset. Korelasi diukur dalam rentang -1 hingga 1, di mana:
 
@@ -118,7 +118,7 @@ Heatmap di atas menunjukkan matriks korelasi antara berbagai fitur dalam dataset
 3. Korelasi Negatif: Ada korelasi negatif antara *IsActiveMember* dan *Exited* (-0.16), menunjukkan bahwa pelanggan yang aktif cenderung memiliki peluang lebih rendah untuk keluar dari layanan. Namun, nilai korelasinya juga cukup rendah.
 4. Fitur Lainnya: Sebagian besar fitur memiliki korelasi sangat rendah satu sama lain, seperti *CreditScore* terhadap fitur lain yang hampir semuanya berada di sekitar 0. Ini menunjukkan bahwa sebagian besar fitur cukup independen.
 
-# Boxplot_exited.img ===
+# <img src = "gambar/Boxplot_exited.png"/> <br>
 
 Dari hasil analisis variabel numerik vs exited menggunakan `boxplot`, Age tampak sebagai variabel yang paling relevan dalam membedakan antara pelanggan yang churn dan yang tidak. Variabel lain seperti NumOfProducts juga menunjukkan sedikit perbedaan, namun tidak sejelas variabel Age. Variabel lainnya, seperti CreditScore, Tenure, Balance, EstimatedSalary, Satisfaction_Score, dan Point_Earned, menunjukkan distribusi yang hampir serupa untuk kedua kelompok dan mungkin memiliki pengaruh yang lebih kecil terhadap churn.
 
@@ -207,10 +207,6 @@ Logistic Regression menggunakan fungsi *sigmoid* untuk mengubah output linear me
 
 # Logistic.Img ===
 
-\[
-\sigma(z) = \frac{1}{1 + e^{-z}}
-\]
-
 Di sini, \( z = w \cdot x + b \), dengan:
 - \( w \) sebagai bobot (koefisien)
 - \( x \) sebagai fitur
@@ -238,14 +234,6 @@ Untuk meningkatkan performa model, dilakukan **Hyperparameter Tuning** pada Rand
 ## Pemilihan Model Terbaik
 
 Dari hasil evaluasi, model terbaik dipilih berdasarkan akurasi dan metrik evaluasi seperti Confusion Matrix. *Random Forest* dipilih sebagai model terbaik karena memiliki performa yang lebih baik secara keseluruhan dibandingkan Logistic Regression dalam memprediksi data uji. Meskipun Logistic Regression lebih cepat, Random Forest menawarkan akurasi yang lebih tinggi dan stabilitas dalam pengambilan keputusan, menjadikannya pilihan yang lebih tepat untuk kebutuhan bisnis.
-
-===============================================================================================
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan kelebihan dan kekurangan dari setiap algoritma yang digunakan.
-- Jika menggunakan satu algoritma pada solution statement, lakukan proses improvement terhadap model dengan hyperparameter tuning. **Jelaskan proses improvement yang dilakukan**.
-- Jika menggunakan dua atau lebih algoritma pada solution statement, maka pilih model terbaik sebagai solusi. **Jelaskan mengapa memilih model tersebut sebagai model terbaik**.
- 
-===============================================================================================
 
 ## Evaluation
 Model *Random Forest* yang diuji pada data sintetis sebelumnya memberikan hasil yang jauh lebih baik, dengan akurasi sebesar 95% dan kinerja yang lebih seimbang pada kedua kelas, termasuk kelas minoritas. Perbedaan utama antara kedua model ini adalah:
