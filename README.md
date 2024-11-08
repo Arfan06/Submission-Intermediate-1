@@ -349,22 +349,5 @@ Berdasarkan grafik Feature Importances dari model Random Forest untuk memprediks
 - NumOfProducts dan Balance: Kedua fitur ini juga memiliki pengaruh yang cukup signifikan dibandingkan dengan fitur lainnya. Kemungkinan besar, jumlah produk yang dimiliki pelanggan dan saldo mereka juga berkaitan dengan keputusan mereka untuk tetap menggunakan atau meninggalkan layanan.
 - Fitur Lainnya: Sebagian besar fitur lainnya, seperti CreditScore, Geography, dan Gender, memiliki nilai penting yang jauh lebih kecil. Ini menunjukkan bahwa mereka tidak terlalu berpengaruh dalam model ini.
 
-Dari hasil yang telah diperoleh, dapat disimpulkan bahwa keluhan pelanggan (complain) merupakan indikator terkuat untuk churn, diikuti oleh umur dan jumlah produk yang dimiliki. Dengan demikian, jika perusahaan ingin mengurangi churn, fokus utama sebaiknya pada peningkatan layanan pelanggan dan penanganan keluhan. Menyediakan layanan yang lebih baik untuk kelompok umur tertentu atau produk tambahan yang relevan,
-
-========================================================================
-
-Sebagai contoh, Anda memiih kasus klasifikasi dan menggunakan metrik **akurasi, precision, recall, dan F1 score**. Jelaskan mengenai beberapa hal berikut:
-- Penjelasan mengenai metrik yang digunakan
-- Menjelaskan hasil proyek berdasarkan metrik evaluasi
-
-Ingatlah, metrik evaluasi yang digunakan harus sesuai dengan konteks data, problem statement, dan solusi yang diinginkan.
-
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan formula metrik dan bagaimana metrik tersebut bekerja.
-
-**---Ini adalah bagian akhir laporan---**
-
-_Catatan:_
-- _Anda dapat menambahkan gambar, kode, atau tabel ke dalam laporan jika diperlukan. Temukan caranya pada contoh dokumen markdown di situs editor [Dillinger](https://dillinger.io/), [Github Guides: Mastering markdown](https://guides.github.com/features/mastering-markdown/), atau sumber lain di internet. Semangat!_
-- Jika terdapat penjelasan yang harus menyertakan code snippet, tuliskan dengan sewajarnya. Tidak perlu menuliskan keseluruhan kode project, cukup bagian yang ingin dijelaskan saja.
+Dari hasil yang telah diperoleh, dapat disimpulkan bahwa keluhan pelanggan (complain) merupakan indikator terkuat untuk churn, diikuti oleh umur dan jumlah produk yang dimiliki. Dengan demikian, jika perusahaan ingin mengurangi churn, fokus utama sebaiknya pada peningkatan layanan pelanggan dan penanganan keluhan. Menyediakan layanan yang lebih baik untuk kelompok umur tertentu atau produk tambahan yang relevan.
 
