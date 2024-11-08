@@ -2,10 +2,10 @@
 
 ## Domain Proyek
 
-Pengamatan dilakukan menggunankan dataset sebuah perusahaan perbankan. Pengamatan ini bertujuan untuk merancang desain sistem machine learning yang berguna untuk meningkatkan performa perbankan dengan cara membangun strategi bisnis yang mampu mempertahankan jumlah nasabah. Fokus pada proyek ini adalah mengetahui seberapa banyak pelanggan yang mungkin akan berhenti menjadi nasabah di masa mendatang. Sistem yang dibangun akan berorientasi pada profil nasabah.
+Pengamatan dilakukan menggunankan dataset sebuah perusahaan perbankan. Pengamatan ini bertujuan untuk merancang desain sistem *machine learning* yang berguna untuk meningkatkan performa perbankan dengan cara membangun strategi bisnis yang mampu mempertahankan jumlah nasabah. Fokus pada proyek ini adalah mengetahui seberapa banyak pelanggan yang mungkin akan berhenti menjadi nasabah di masa mendatang. Sistem yang dibangun akan berorientasi pada profil nasabah.
 
 **Tinjauan Pustaka**:
-- Customer churn terjadi ketika pelanggan berhenti melakukan pembelian. Hal itu dapat terjadi dari berbagai faktor. Untuk mengetahui keterkaitan antar variabel (faktor) terhadap kemungkinan churn, maka diperlukan proses feature selection. Selanjutnya, variabel yang dinilai secara statistik memiliki hubungan yang kuat, akan digunakan untuk pelatihan model machine learning dengan algoritma random forest. Pelanggan yang diklasifikasikan ke dalam kategori churn, akan mendapatkan tindakan analisis lanjutan berupa sistem rekomendasi produk yang berguna untuk menarik kembali minat pelanggan disertai strategi marketing dan promosi di masa mendatang.
+- *Customer churn* terjadi ketika pelanggan berhenti melakukan pembelian. Hal itu dapat terjadi dari berbagai faktor. Untuk mengetahui keterkaitan antar variabel (faktor) terhadap kemungkinan churn, maka diperlukan proses feature selection. Selanjutnya, variabel yang dinilai secara statistik memiliki hubungan yang kuat, akan digunakan untuk pelatihan model machine learning dengan algoritma random forest. Pelanggan yang diklasifikasikan ke dalam kategori churn, akan mendapatkan tindakan analisis lanjutan berupa sistem rekomendasi produk yang berguna untuk menarik kembali minat pelanggan disertai strategi marketing dan promosi di masa mendatang.
 
 - Churn rate yang tinggi menunjukkan bahwa banyak pelanggan yang memilih untuk tidak lagi membeli produk atau layanan dari perusahaan (Ahmed and Maheswari 2019). Pengujian dari 5 model untuk menentukan churn pada data perbankan,  dua model memiliki performa dan akurasi terbaik, yaitu random forest classifier dan KNeighbor classifier (Husein et,al., 2021). Sedangkan dari 12 literatur yang dibandingkan, nilai cosine similiarity dan akurasi model terbaik dapat diperolah menggunakan algoritma K-Nearest Neighbor dan Content Based filtering dalam memberikan rekomendasi kepada pengguna (Futri, Nur et,al., 2023).
 
@@ -113,9 +113,9 @@ Heatmap di atas menunjukkan matriks korelasi antara berbagai fitur dalam dataset
 - Nilai mendekati 0 (biru gelap), menunjukkan tidak adanya atau sedikit korelasi antara dua fitur.  
 
 **Temuan Utama:**
-1. Korelasi tertinggi: Complain memiliki sempurna dengan variabel `Exited`, yaitu sebesar 1 yang menunjukan adanya variabel positif yang menunjukan kecenderungan bahwa customer yang melakukan complain akan sangat mungkin melakukan Churn.
-2. Korelasi lainnya: Korelasi lainnya dalam dataset ini adalah antara *Age* dan *Exited* dengan nilai 0.29, menunjukkan bahwa usia memiliki hubungan positif yang lemah dengan variabel target `Exited`.
-3. Korelasi Negatif: Ada korelasi negatif antara *IsActiveMember* dan *Exited* (-0.16), menunjukkan bahwa pelanggan yang aktif cenderung memiliki peluang lebih rendah untuk keluar dari layanan. Namun, nilai korelasinya juga cukup rendah.
+1. Korelasi tertinggi: Complain memiliki sempurna dengan variabel Exited, yaitu sebesar 1 yang menunjukan adanya variabel positif yang menunjukan kecenderungan bahwa customer yang melakukan complain akan sangat mungkin melakukan Churn.
+2. Korelasi lainnya: Korelasi lainnya dalam dataset ini adalah antara Age dan Exited dengan nilai 0.29, menunjukkan bahwa usia memiliki hubungan positif yang lemah dengan variabel target Exited.
+3. Korelasi Negatif: Ada korelasi negatif antara IsActiveMember dan Exited (-0.16), menunjukkan bahwa pelanggan yang aktif cenderung memiliki peluang lebih rendah untuk keluar dari layanan. Namun, nilai korelasinya juga cukup rendah.
 4. Fitur Lainnya: Sebagian besar fitur memiliki korelasi sangat rendah satu sama lain, seperti *CreditScore* terhadap fitur lain yang hampir semuanya berada di sekitar 0. Ini menunjukkan bahwa sebagian besar fitur cukup independen.
 
 # <img src = "gambar/Boxplot_exited.png"/> <br>
@@ -126,17 +126,17 @@ Dari hasil analisis variabel numerik vs exited menggunakan `boxplot`, Age tampak
 ### Drop Fitur dan Encoding Data
 Pada tahap ini, beberapa langkah pra-pemrosesan diterapkan pada dataset agar model lebih mudah dalam memahami data:
 
-1. Menghapus Kolom yang Tidak Relevan: Kolom `RowNumber`, `Surname`, dan `CustomerId` dihapus dari dataset karena tidak berkontribusi langsung terhadap prediksi.
+1. Menghapus Kolom yang Tidak Relevan: Kolom RowNumber, Surname, dan CustomerId dihapus dari dataset karena tidak berkontribusi langsung terhadap prediksi.
 
-2. Encoding Variabel Kategorikal: Kolom kategorikal seperti `Geography`, `Gender`, dan `Card_Type` dikonversi menjadi bentuk numerik menggunakan teknik One-Hot Encoding. Hasil encoding ini disimpan dalam variabel `hot`.
+2. Encoding Variabel Kategorikal: Kolom kategorikal seperti Geography, Gender, dan Card_Type dikonversi menjadi bentuk numerik menggunakan teknik One-Hot Encoding. Hasil encoding ini disimpan dalam variabel hot.
 
-3. Menggabungkan Hasil Encoding: Dataset utama `df` dikombinasikan dengan data hasil encoding (`hot`) sehingga informasi dalam variabel kategorikal sekarang tersimpan sebagai kolom numerik.
+3. Menggabungkan Hasil Encoding: Dataset utama df dikombinasikan dengan data hasil encoding (`hot`) sehingga informasi dalam variabel kategorikal sekarang tersimpan sebagai kolom numerik.
 
-4. Menghapus Kolom Kategorikal Asli: Setelah encoding, kolom asli `Geography`, `Gender`, dan `Card_Type` dihapus dari dataset untuk menghindari redundansi.
+4. Menghapus Kolom Kategorikal Asli: Setelah encoding, kolom asli Geography, Gender, dan Card_Type dihapus dari dataset untuk menghindari redundansi.
 
-5. Mempersiapkan Fitur dan Label: Semua kolom kecuali `Exited` diambil sebagai fitur (`X`), sementara kolom `Exited` dijadikan label (`y`). Fitur `X` diubah ke dalam bentuk array untuk memudahkan proses pelatihan model.
+5. Mempersiapkan Fitur dan Label: Semua kolom kecuali Exited diambil sebagai fitur (`X`), sementara kolom Exited dijadikan label (`y`). Fitur `X` diubah ke dalam bentuk array untuk memudahkan proses pelatihan model.
 
-Dalam proyek ini, variabel kategorikal seperti `Geography`, `Gender`, dan `Card_Type` perlu diubah menjadi format numerik agar dapat diproses oleh model machine learning. Kebanyakan algoritma machine learning hanya dapat bekerja dengan data numerik, sehingga encoding pada variabel kategorikal diperlukan untuk memastikan kompatibilitas data dengan model. *One-Hot Encoding* dipilih karena teknik ini efektif dalam menangani variabel kategorikal tanpa memperkenalkan urutan atau hierarki yang mungkin tidak ada.
+Dalam proyek ini, variabel kategorikal seperti Geography, Gender, dan Card_Type perlu diubah menjadi format numerik agar dapat diproses oleh model machine learning. Kebanyakan algoritma machine learning hanya dapat bekerja dengan data numerik, sehingga encoding pada variabel kategorikal diperlukan untuk memastikan kompatibilitas data dengan model. *One-Hot Encoding* dipilih karena teknik ini efektif dalam menangani variabel kategorikal tanpa memperkenalkan urutan atau hierarki yang mungkin tidak ada.
 
 ### Split Dataset
 Pada project ini, dataset dibagi menjadi dua bagian menggunakan `train_test_split` dari library scikitlearn, yaitu data pelatihan dan data pengujian, dengan perbandingan 80:20. Artinya, 80% dari data digunakan untuk melatih model, sementara 20% sisanya digunakan untuk menguji performa model. Pembagian ini bertujuan untuk memastikan bahwa model dapat mempelajari pola dari data pelatihan, dan kemudian diuji pada data pengujian yang belum pernah dilihat model sebelumnya.
@@ -144,7 +144,8 @@ Pada project ini, dataset dibagi menjadi dua bagian menggunakan `train_test_spli
 ### Standarisasi data
 Standarisasi adalah teknik praproses data yang digunakan untuk mengubah skala data agar dapat digunakan lebih optimal oleh algoritma machine learning. Standarisasi mengubah data sehingga memiliki mean (rata-rata) 0 dan standard deviation (deviasi standar) 1. Rumus standarisasi adalah sebagai berikut:
 
-# *Standarisasi.img* ===
+# <img src = "gambar/Rumus_standarisasi.png"/> <br>
+
 Di mana 𝑋adalah nilai asli, μ adalah rata-rata, dan σ adalah deviasi standar dari data.
 
 ### Model Development
@@ -155,7 +156,8 @@ Dalam proses pengembangan model, pemilihan parameter yang optimal sangat penting
 2. **RandomizedSearchCV**: Teknik ini adalah alternatif yang lebih efisien dari `GridSearchCV`, di mana hanya sebagian dari kombinasi parameter yang dicoba secara acak. Dengan cara ini, `RandomizedSearchCV` dapat mengurangi waktu komputasi secara signifikan sambil tetap berpotensi menemukan parameter yang optimal. Pada kode ini, `RandomizedSearchCV` juga menggunakan cross-validation dengan 5 lipatan dan bekerja secara paralel (`n_jobs=-1`) untuk mempercepat proses. Setelah parameter terbaik ditemukan, hasil seperti *criterion* terbaik, skor terbaik (*best score*), *min_samples_split*, dan *max_depth* yang optimal akan dicetak, membantu kita memahami konfigurasi terbaik dari model.
 
 Berdasarkan hasil pemilihan parameter, diperoleh parameter terbaik sebagai berikut:
-# SearchCV.img ===
+# <img src = "gambar/Best_param.png"/> <br>
+
 - **Algoritma**: Gini
   - Model ini menggunakan algoritma **Decision Tree** dengan **impurity criterion** berdasarkan **Gini index** untuk memisahkan data.
 
@@ -167,13 +169,6 @@ Berdasarkan hasil pemilihan parameter, diperoleh parameter terbaik sebagai berik
 
 - **Max Depth**: 20
   - **Kedalaman maksimum** (maximum depth) dari pohon keputusan ini dibatasi hingga **20 level**, untuk mengontrol ukuran pohon dan menghindari overfitting.
-
-========================================================================
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan proses data preparation yang dilakukan
-- Menjelaskan alasan mengapa diperlukan tahapan data preparation tersebut.
-
-========================================================================
 
 ## Modeling
 Dalam proyek ini menggunakan dua algoritma *Random Forest* dan *Logistic Regression*. Masing-masing algoritma ini memiliki kelebihan dan kekurangannya, sehingga memungkinkan untuk membandingkan performa keduanya untuk mendapatkan nilai akurasi terbaik.
@@ -205,9 +200,9 @@ Untuk klasifikasi, prediksi akhir ditentukan melalui voting mayoritas dari predi
 
 Logistic Regression menggunakan fungsi *sigmoid* untuk mengubah output linear menjadi probabilitas, dengan rumus:
 
-# Logistic.Img ===
+# <img src = "gambar/Rumus_lr.png"/> <br>
 
-Di sini, \( z = w \cdot x + b \), dengan:
+Penjelasan:
 - \( w \) sebagai bobot (koefisien)
 - \( x \) sebagai fitur
 - \( b \) sebagai bias
@@ -227,13 +222,112 @@ Parameter \( w \) dan \( b \) dalam Logistic Regression diestimasi menggunakan m
 Logistic Regression sering digunakan untuk masalah seperti deteksi spam, prediksi churn, dan analisis kredit, karena kesederhanaan dan efektifitasnya.
 
 
-### Proses Improvement dengan Hyperparameter Tuning
+## Perbandingan Model
 
-Untuk meningkatkan performa model, dilakukan **Hyperparameter Tuning** pada Random Forest menggunakan Grid Search. Dengan menetapkan parameter-parameter seperti `n_estimators`, `min_samples_split`, `max_depth`, dan `criterion`,  dapat mengoptimalkan performa model dan meningkatkan akurasi prediksi. Dengan mencoba berbagai kombinasi parameter, Grid Search membantu dalam menemukan setelan optimal yang meningkatkan kemampuan model dalam memprediksi data secara lebih akurat.
+### Metrik Evaluasi Model
+
+#### Akurasi
+**Akurasi** mengukur persentase prediksi yang benar dibandingkan dengan total data. Rumusnya:
+
+    Akurasi = (True Positives + True Negatives) / Total Samples
+
+Akurasi mudah dipahami, tetapi bisa menyesatkan jika data tidak seimbang (contoh: ada lebih banyak sampel dari satu kelas).
+
+#### Precision
+**Precision** mengukur seberapa banyak prediksi positif yang benar dari semua prediksi positif yang dihasilkan. Precision berguna dalam kasus di mana **false positives** harus diminimalkan, misalnya dalam deteksi spam. Rumusnya:
+
+    Precision = True Positives / (True Positives + False Positives)
+
+Precision yang tinggi berarti model memiliki sedikit kesalahan positif.
+
+#### Recall
+**Recall** (atau **Sensitivitas**) mengukur seberapa banyak prediksi positif yang benar dari keseluruhan sampel positif. Recall penting jika **false negatives** harus diminimalkan, seperti dalam diagnosis penyakit. Rumusnya:
+
+    Recall = True Positives / (True Positives + False Negatives)
+
+Recall yang tinggi berarti model berhasil menangkap sebagian besar sampel positif.
+
+#### F1 Score
+**F1 Score** adalah metrik yang menggabungkan precision dan recall menjadi satu nilai. Ini adalah rata-rata harmonis antara precision dan recall, berguna jika kita ingin mempertimbangkan kedua metrik secara bersamaan, terutama jika kelas tidak seimbang. Rumusnya:
+
+    F1 Score = 2 * (Precision * Recall) / (Precision + Recall)
+
+Nilai F1 Score berada di antara 0 dan 1, di mana 1 menunjukkan model yang sempurna. 
+
+
+#### 1. Model Random Forest
+
+<img src="gambar/result_main_rf.png" alt="Metrik Evaluasi Random Forest dengan Data Asli"/>
+<figcaption>Gambar 1.1: Metrik evaluasi Random Forest dengan data asli.</figcaption>
+<br><br>
+
+Model yang diuji menunjukkan hasil yang sangat baik pada data uji dengan akurasi 99.9%. Ini berarti bahwa model berhasil mengklasifikasikan hampir semua sampel dengan benar. Rata-rata untuk semua metrik (macro avg dan weighted avg) menunjukkan nilai sempurna (1.00), mengindikasikan kinerja yang konsisten di seluruh kelas.
+
+Secara keseluruhan, model ini memiliki performa yang sangat tinggi dalam mendeteksi kedua kelas pada data uji, dengan tingkat kesalahan yang mendekati nol.
+
+<img src="gambar/Result_synth_rf.png" alt="Metrik Evaluasi Random Forest dengan Data Sintetis"/>
+<figcaption>Gambar 1.2: Metrik evaluasi Random Forest dengan data sintetis.</figcaption>
+<br><br>
+
+Berdasarkan hasil evaluasi, model `RandomForestClassifier` mencapai akurasi sebesar 0.95 atau 95% pada data sintetis. Berikut adalah penjelasan lebih detail dari hasil classification report:
+
+- **Class 0** (label mayoritas):
+  - **Precision**: 0.96, menunjukkan bahwa 96% dari prediksi untuk kelas ini benar.
+  - **Recall**: 0.96, menunjukkan bahwa model berhasil mengidentifikasi 96% dari semua instance sebenarnya dalam kelas ini.
+  - **F1-Score**: 0.96, yang merupakan kombinasi dari precision dan recall, menunjukkan performa model yang konsisten pada kelas ini.
+
+- **Class 1** (label minoritas):
+  - **Precision**: 0.83, menunjukkan bahwa 83% dari prediksi untuk kelas ini benar.
+  - **Recall**: 0.90, menunjukkan bahwa model berhasil mengidentifikasi 90% dari semua instance sebenarnya dalam kelas ini.
+  - **F1-Score**: 0.84, yang menunjukkan kinerja yang baik meskipun lebih rendah daripada kelas mayoritas.
+
+- **Akurasi Keseluruhan**: Model mencapai akurasi 94%, yang berarti bahwa 94% prediksi pada data sintetis adalah benar.
+  
+- **Macro Average**: Nilai rata-rata precision, recall, dan F1-score untuk kedua kelas adalah 0.90, yang memberikan gambaran kinerja rata-rata untuk masing-masing kelas.
+  
+- **Weighted Average**: Nilai rata-rata precision, recall, dan F1-score dengan mempertimbangkan proporsi setiap kelas adalah 0.94, yang menunjukkan bahwa model memiliki kinerja keseluruhan yang baik, terutama pada kelas mayoritas.
+
+Secara keseluruhan, model menunjukkan performa yang sangat baik dalam memprediksi kelas mayoritas, dengan performa yang cukup baik juga untuk kelas minoritas.
+
+
+#### 2. Model Logistic Regression
+
+<img src="gambar/result_main_lr.png" alt="Metrik Evaluasi Logistic Regression dengan Data Asli"/>
+<figcaption>Gambar 2.1: Metrik evaluasi Logistic Regression dengan data asli.</figcaption>
+<br><br>
+
+Model **Random Forest** yang diuji sebelumnya menunjukkan hasil yang jauh lebih baik dengan akurasi sebesar 99.85% dan kinerja yang sangat baik pada kedua kelas, termasuk kelas minoritas. Sebaliknya, model **Logistic Regression** memiliki kelemahan yang cukup signifikan dalam mendeteksi kelas minoritas, yang terlihat dari rendahnya nilai recall (0.07) dan F1-score (0.12) pada kelas tersebut.
+
+Perbedaan utama antara kedua model ini adalah:
+- **Akurasi Keseluruhan**: Random Forest (99.85%) jauh lebih tinggi dibandingkan Logistic Regression (80%).
+- **Kinerja pada Kelas Minoritas**: Random Forest dapat memprediksi kelas minoritas dengan jauh lebih baik dibandingkan Logistic Regression, yang mengalami kesulitan dalam mendeteksi instance kelas ini.
+- **General Performa**: Random Forest menghasilkan model yang lebih andal dan seimbang pada kedua kelas, sementara Logistic Regression tampak bias terhadap kelas mayoritas.
+
+<img src="gambar/Result_synth_lr.png" alt="Metrik Evaluasi Logistic Regression dengan Data Sintetis"/>
+<figcaption>Gambar 2.2: Metrik evaluasi Logistic Regression dengan data sintetis.</figcaption>
+<br><br>
+
+Model **Logistic Regression** menghasilkan akurasi sebesar 0.80 atau 80% pada data sintetis. Berikut adalah ringkasan hasil evaluasi berdasarkan classification report:
+
+- **Class 0** (label mayoritas):
+  - **Precision**: 0.80, yang berarti 80% prediksi kelas 0 adalah benar.
+  - **Recall**: 0.99, menunjukkan bahwa model berhasil mengidentifikasi 99% dari semua instance sebenarnya di kelas ini.
+  - **F1-Score**: 0.89, menunjukkan performa yang baik pada kelas mayoritas.
+
+- **Class 1** (label minoritas):
+  - **Precision**: 0.16, menunjukkan bahwa hanya 16% dari prediksi kelas 1 adalah benar.
+  - **Recall**: 0.00, menunjukkan model hanya mengidentifikasi 0% dari instance yang sebenarnya di kelas ini.
+  - **F1-Score**: 0.01, yang menunjukkan performa yang lemah pada kelas ini.
+
+- **Akurasi Keseluruhan**: Model mencapai akurasi 80%, yang menunjukkan bahwa 80% prediksi pada data sintetis adalah benar.
+
+- **Macro Average**: Rata-rata precision, recall, dan F1-score untuk kedua kelas adalah sekitar 0.48, 0.5, dan 0.45. Nilai ini menunjukkan bahwa kinerja pada kedua kelas, terutama kelas minoritas, masih rendah.
+
+- **Weighted Average**: Nilai rata-rata precision, recall, dan F1-score dengan mempertimbangkan proporsi masing-masing kelas adalah sekitar 0.67, 0.80, dan 0.71, yang menunjukkan performa yang lebih baik pada kelas mayoritas.
 
 ## Pemilihan Model Terbaik
 
-Dari hasil evaluasi, model terbaik dipilih berdasarkan akurasi dan metrik evaluasi seperti Confusion Matrix. *Random Forest* dipilih sebagai model terbaik karena memiliki performa yang lebih baik secara keseluruhan dibandingkan Logistic Regression dalam memprediksi data uji. Meskipun Logistic Regression lebih cepat, Random Forest menawarkan akurasi yang lebih tinggi dan stabilitas dalam pengambilan keputusan, menjadikannya pilihan yang lebih tepat untuk kebutuhan bisnis.
+Dari hasil evaluasi, model terbaik dipilih berdasarkan akurasi dan metrik evaluasi seperti *Confusion Matrix*. *Random Forest* dipilih sebagai model terbaik karena memiliki performa yang lebih baik secara keseluruhan dibandingkan Logistic Regression dalam memprediksi data uji. Meskipun Logistic Regression lebih cepat, Random Forest menawarkan akurasi yang lebih tinggi dan stabilitas dalam pengambilan keputusan, menjadikannya pilihan yang lebih tepat untuk kebutuhan bisnis.
 
 ## Evaluation
 Model *Random Forest* yang diuji pada data sintetis sebelumnya memberikan hasil yang jauh lebih baik, dengan akurasi sebesar 95% dan kinerja yang lebih seimbang pada kedua kelas, termasuk kelas minoritas. Perbedaan utama antara kedua model ini adalah:
@@ -246,6 +340,9 @@ Secara keseluruhan, *Random Forest* menunjukkan kinerja yang lebih unggul pada d
 
 
 ### Kesimpulan
+
+# <img src = "gambar/Best_feature.png"/> <br>
+
 Berdasarkan grafik Feature Importances dari model Random Forest untuk memprediksi customer churn, dapat dijumpai beberapa hal penting tentang fitur-fitur yang paling mempengaruhi hasil prediksi:
 - Complain: Fitur ini memiliki pengaruh yang paling besar dalam memprediksi churn, dengan nilai penting yang jauh lebih tinggi dibandingkan fitur lainnya. Ini menunjukkan bahwa pelanggan yang memiliki keluhan (complain) memiliki kemungkinan yang lebih tinggi untuk churn (berhenti menggunakan layanan).
 - Age: Fitur umur pelanggan juga cukup berpengaruh, meskipun jauh di bawah complain. Hal ini bisa mengindikasikan bahwa usia tertentu lebih rentan untuk melakukan churn.
