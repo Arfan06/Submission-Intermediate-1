@@ -37,29 +37,35 @@ Customer churn di sektor perbankan merupakan tantangan besar yang dapat memengar
 
 ## Data Understanding
 ### Variabel-variabel pada dataset Penjualan Elektronik adalah sebagai berikut:
-- RowNumber — jumlah baris.
-- CustomerId — mengandung nilai random sebagai ID pelanggan.
-- Surname — nama belakang pelanggan.
-- CreditScore — kredit skor pelanggan.
-- Geography — lokasi customer.
-- Gender — jenis kelamin.
-- Age — usia.
-- Tenure — durasi customer menjadi nasabah.
-- Balance — saldo.
-- NumOfProducts —jumlah produk yang dibeli nasabah melalui bank.
-- HasCrCard — kepemilikan kartu kredit.
-- IsActiveMember — penilaian aktivitas nasabah.
-- EstimatedSalary — estimasi gaji.
-- Exited — penilaian status nasabah.
-- Complain — jumlah komplain nasabah.
-- Satisfaction Score — penilaian kepuasan pelanggan terhadap penyelesaian masalah yang dihadapi.
-- Card Type — tipe kartu yang dimiliki nasabah.
-- Points Earned — poin yang dimiliki nasabah dari kartu kredit.
+| Kolom               | Tipe Data | Uraian                                                                                          |
+|---------------------|-----------|-------------------------------------------------------------------------------------------------|
+| RowNumber           | int64     | Jumlah baris.                                                                                   |
+| CustomerId          | int64     | Mengandung nilai unik sebagai ID nasabah.                                                       |
+| Surname             | object    | Nama belakang nasabah.                                                                          |
+| CreditScore         | int64     | Skor kredit nasabah.                                                                            |
+| Geography           | object    | Lokasi nasabah.                                                                                 |
+| Gender              | object    | Jenis kelamin nasabah.                                                                          |
+| Age                 | int64     | Usia nasabah.                                                                                   |
+| Tenure              | int64     | Durasi nasabah menjadi pelanggan (tahun).                                                       |
+| Balance             | float64   | Saldo rekening nasabah.                                                                         |
+| NumOfProducts       | int64     | Jumlah produk yang dibeli nasabah melalui bank.                                                 |
+| HasCrCard           | int64     | Kepemilikan kartu kredit (1 jika memiliki, 0 jika tidak).                                       |
+| IsActiveMember      | int64     | Status aktivitas nasabah (1 jika aktif, 0 jika tidak).                                         |
+| EstimatedSalary     | float64   | Estimasi gaji nasabah per tahun.                                                                |
+| Exited              | int64     | Status churn (1 jika meninggalkan bank, 0 jika tetap).                                         |
+| Complain            | int64     | Jumlah komplain yang diajukan nasabah.                                                          |
+| Satisfaction Score  | int64     | Penilaian kepuasan pelanggan terhadap penyelesaian masalah yang dihadapi (skor 1-5).            |
+| Card Type           | object    | Tipe kartu yang dimiliki nasabah.                                                               |
+| Point Earned        | int64     | Jumlah poin yang dimiliki nasabah dari penggunaan kartu kredit.                                 |
+
+
+Dataset *Bank Customer Churn* ini terdiri dari **10,000 baris** dan **18 kolom**, menyediakan data lengkap mengenai nasabah bank. Setiap kolom mewakili atribut spesifik nasabah, seperti `CreditScore`, `Age`, `Geography`, `NumOfProducts`, dan `Satisfaction Score`, yang dapat mendukung analisis perilaku nasabah dalam kaitannya dengan potensi churn, yaitu kemungkinan nasabah meninggalkan bank. Melalui analisis data ini, bank dapat lebih memahami faktor-faktor utama yang mendorong churn dan merancang strategi retensi nasabah yang lebih efektif. Dataset ini dapat diakses melalui tautan berikut: [Bank Customer Churn Dataset on Kaggle](https://www.kaggle.com/datasets/radheshyamkollipara/bank-customer-churn/data).
+
 
 ### Data Cleaning
 Dari informasi variabel data diatas, terdapat kesalahan dalam penulisan kolom data. Beberapa kolom memiliki karakter penghubung menggunakan spasi, yaitu kolom satisfaction score, card type dan point earned. Untuk memudahkan pemrosesan data, kolom-kolom tersebut akan diubah menggunkan karakter underscore sebagai penghubungnya.
 
-Berdasarkan dataset yang tersedia, terdapat beberapa kolom yang berisi nilai nol "0" dan tidak ditemukan data sel kosong "Nan". Sel bernilai nol "0" merupakan hasil transformasi data yang sebelumnya adalaha tipe data boolean. Sehingga nilai nol "0" pada dataframe *expected* sebagai representasi dari nilai false/no/tidak.
+Berdasarkan dataset yang tersedia, terdapat beberapa kolom yang berisi nilai nol "0" dan tidak ditemukan data sel kosong "*Nan*". Sel bernilai nol "0" merupakan hasil transformasi data yang sebelumnya adalaha tipe data boolean. Sehingga nilai nol "0" pada dataframe *expected* sebagai representasi dari nilai *false*/*no*/tidak.
 
 ### Variabel Deskriptif
 |                    | CreditScore   | Age         | Tenure      | Balance        | NumOfProducts | EstimatedSalary   | Satisfaction Score | Point Earned |
@@ -77,6 +83,7 @@ Berdasarkan dataset yang tersedia, terdapat beberapa kolom yang berisi nilai nol
 Rata-rata skor kredit pelanggan adalah 650, yang relatif baik, sementara rata-rata gaji berada di kisaran 100.000. Usia rata-rata pelanggan sekitar 39 tahun dan lama bergabung (tenure) rata-rata 5 tahun, ini menunjukkan bahwa banyak pelanggan berada dalam usia produktif dan telah cukup lama menjadi bagian dari perusahaan. Tingkat retensi yang stabil ini dapat menjadi indikator loyalitas pelanggan. Skor kepuasan nasabah 3 (cukup puas) dan poin rata-rata adalah 606, yang menunjukkan tingkat keterlibatan dan kepuasan pelanggan yang cukup stabil.
 
 ### Univariate Analysis
+Univariate analysis adalah teknik analisis statistik yang digunakan untuk mengevaluasi karakteristik dari satu variabel pada satu waktu. Tujuannya adalah memahami pola data yang ada pada satu variabel. Analisis ini memberikan gambaran awal mengenai karakteristik variabel yang dapat membantu dalam proses eksplorasi data.
 
 # <img src = "gambar/Box Plot Univariate.png"/> <br>
 
@@ -99,6 +106,7 @@ Pada masing-masing tipe kartu memiliki besaran data yang seimbang di range sekit
 Pengguna dengan jenis kelamin laki-laki mendominasi sebesar 54,57% dan pengguna dengan jenis kelamin perempuan sebesar 45,43%.
 
 ### Multivariate Analysis
+Multivariate analysis adalah teknik analisis statistik yang mengevaluasi hubungan antara dua atau lebih variabel secara bersamaan. Tujuan utama dari analisis ini adalah untuk mengidentifikasi pola, keterkaitan, dan korelasi antar variabel yang mungkin tidak terlihat melalui analisis satu variabel (univariate). Dalam data yang kompleks, multivariate analysis membantu untuk memahami interaksi antara beberapa variabel yang dapat memberikan *insight* lebih mendalam.
 
 # <img src = "gambar/Pairplot.png"/> <br>
 
@@ -146,9 +154,9 @@ Standarisasi adalah teknik praproses data yang digunakan untuk mengubah skala da
 
 # <img src = "gambar/Rumus_standarisasi.png"/> <br>
 
-Di mana 𝑋adalah nilai asli, μ adalah rata-rata, dan σ adalah deviasi standar dari data.
+Di mana 𝑋 adalah nilai asli, μ adalah rata-rata, dan σ adalah deviasi standar dari data.
 
-### Model Development
+## Modeling
 Dalam proses pengembangan model, pemilihan parameter yang optimal sangat penting untuk meningkatkan kinerja model serta mencegah overfitting atau underfitting. Pada kode ini, digunakan dua teknik pencarian parameter untuk model `RandomForestClassifier`: **GridSearchCV** dan **RandomizedSearchCV**.
 
 1. **GridSearchCV**: Teknik ini digunakan untuk melakukan pencarian komprehensif terhadap kombinasi parameter tertentu yang didefinisikan dalam `param_grid`. `GridSearchCV` mengevaluasi semua kemungkinan kombinasi dari parameter `n_estimators`, `min_samples_split`, `max_depth`, dan `criterion`. Dengan menggunakan cross-validation sebanyak 5 kali (`cv=5`), `GridSearchCV` mengevaluasi setiap kombinasi parameter secara sistematis untuk memilih konfigurasi terbaik. Meskipun sangat efektif, teknik ini bisa menjadi lambat karena harus mencoba semua kemungkinan kombinasi.
@@ -159,22 +167,21 @@ Berdasarkan hasil pemilihan parameter, diperoleh parameter terbaik sebagai berik
 # <img src = "gambar/Best_param.png"/> <br>
 
 - **Algoritma**: Gini
-  - Model ini menggunakan algoritma **Decision Tree** dengan **impurity criterion** berdasarkan **Gini index** untuk memisahkan data.
+  - Model ini menggunakan algoritma *Decision Tree* dengan *impurity criterion* berdasarkan *Gini index* untuk memisahkan data.
 
 - **Score**: 0.9985
   - Skor model ini mencapai **99.85%**, menunjukkan performa yang sangat baik dalam mengklasifikasikan data dengan akurasi tinggi.
 
 - **Min Split**: 2
-  - Model memiliki parameter **minimum split** sebesar **2**, yang artinya sebuah node akan terbagi jika ada setidaknya 2 sample yang dapat dipisahkan.
+  - Model memiliki parameter *minimum split* sebesar **2**, yang artinya sebuah node akan terbagi jika ada setidaknya 2 sample yang dapat dipisahkan.
 
 - **Max Depth**: 20
-  - **Kedalaman maksimum** (maximum depth) dari pohon keputusan ini dibatasi hingga **20 level**, untuk mengontrol ukuran pohon dan menghindari overfitting.
+  - Kedalaman maksimum (*maximum depth*) dari pohon keputusan ini dibatasi hingga **20 level**, untuk mengontrol ukuran pohon dan menghindari overfitting.
 
-## Modeling
 Dalam proyek ini menggunakan dua algoritma *Random Forest* dan *Logistic Regression*. Masing-masing algoritma ini memiliki kelebihan dan kekurangannya, sehingga memungkinkan untuk membandingkan performa keduanya untuk mendapatkan nilai akurasi terbaik.
 
 ### 1. **Random Forest**:
-Algoritma Random Forest bekerja dengan cara membangun sejumlah pohon keputusan (decision trees) secara independen melalui proses yang disebut **Bagging (Bootstrap Aggregating)**. Pada intinya, setiap pohon dalam hutan dibangun dari subset acak dari data pelatihan, dengan beberapa karakteristik utama sebagai berikut:
+Algoritma Random Forest bekerja dengan cara membangun sejumlah pohon keputusan (decision trees) secara independen melalui proses yang disebut *Bagging (Bootstrap Aggregating)*. Pada intinya, setiap pohon dalam hutan dibangun dari subset acak dari data pelatihan, dengan beberapa karakteristik utama sebagai berikut:
    - **Bootstrap Sampling**: Setiap pohon dilatih pada subset acak yang diambil dari data pelatihan. Teknik ini menghasilkan variasi di antara pohon-pohon karena data yang berbeda dipilih pada setiap iterasi.
    - **Pemilihan Fitur Acak**: Setiap kali sebuah node dalam pohon harus dibagi, algoritma hanya mempertimbangkan subset acak dari fitur yang ada, sehingga setiap pohon melihat fitur yang berbeda-beda. Ini mengurangi korelasi antar pohon dan meningkatkan ketahanan terhadap overfitting.
    
@@ -221,40 +228,35 @@ Parameter \( w \) dan \( b \) dalam Logistic Regression diestimasi menggunakan m
 
 Logistic Regression sering digunakan untuk masalah seperti deteksi spam, prediksi churn, dan analisis kredit, karena kesederhanaan dan efektifitasnya.
 
+## Evaluation
+#### Accuracy
+*Accuracy* mengukur persentase prediksi yang benar dibandingkan dengan total data. Rumusnya:
 
-## Perbandingan Model
+    Accuracy = (True Positives + True Negatives) / Total Samples
 
-### Metrik Evaluasi Model
-
-#### Akurasi
-**Akurasi** mengukur persentase prediksi yang benar dibandingkan dengan total data. Rumusnya:
-
-    Akurasi = (True Positives + True Negatives) / Total Samples
-
-Akurasi mudah dipahami, tetapi bisa menyesatkan jika data tidak seimbang (contoh: ada lebih banyak sampel dari satu kelas).
 
 #### Precision
-**Precision** mengukur seberapa banyak prediksi positif yang benar dari semua prediksi positif yang dihasilkan. Precision berguna dalam kasus di mana **false positives** harus diminimalkan, misalnya dalam deteksi spam. Rumusnya:
+*Precision* mengukur seberapa banyak prediksi positif yang benar dari semua prediksi positif yang dihasilkan. Precision berguna dalam kasus di mana *false positives* harus diminimalkan, misalnya dalam deteksi spam. Rumusnya:
 
     Precision = True Positives / (True Positives + False Positives)
 
 Precision yang tinggi berarti model memiliki sedikit kesalahan positif.
 
 #### Recall
-**Recall** (atau **Sensitivitas**) mengukur seberapa banyak prediksi positif yang benar dari keseluruhan sampel positif. Recall penting jika **false negatives** harus diminimalkan, seperti dalam diagnosis penyakit. Rumusnya:
+*Recall* (atau Sensitivitas) mengukur seberapa banyak prediksi positif yang benar dari keseluruhan sampel positif. Recall penting jika *false negatives* harus diminimalkan, seperti dalam diagnosis penyakit. Rumusnya:
 
     Recall = True Positives / (True Positives + False Negatives)
 
 Recall yang tinggi berarti model berhasil menangkap sebagian besar sampel positif.
 
 #### F1 Score
-**F1 Score** adalah metrik yang menggabungkan precision dan recall menjadi satu nilai. Ini adalah rata-rata harmonis antara precision dan recall, berguna jika kita ingin mempertimbangkan kedua metrik secara bersamaan, terutama jika kelas tidak seimbang. Rumusnya:
+*F1 Score* adalah metrik yang menggabungkan precision dan recall menjadi satu nilai. Ini adalah rata-rata harmonis antara precision dan recall, berguna jika kita ingin mempertimbangkan kedua metrik secara bersamaan, terutama jika kelas tidak seimbang. Rumusnya:
 
     F1 Score = 2 * (Precision * Recall) / (Precision + Recall)
 
 Nilai F1 Score berada di antara 0 dan 1, di mana 1 menunjukkan model yang sempurna. 
 
-
+### Perbandingan Model
 #### 1. Model Random Forest
 
 <img src="gambar/result_main_rf.png" alt="Metrik Evaluasi Random Forest dengan Data Asli"/>
@@ -269,7 +271,7 @@ Secara keseluruhan, model ini memiliki performa yang sangat tinggi dalam mendete
 <figcaption>Gambar 1.2: Metrik evaluasi Random Forest dengan data sintetis.</figcaption>
 <br><br>
 
-Berdasarkan hasil evaluasi, model `RandomForestClassifier` mencapai akurasi sebesar 0.95 atau 95% pada data sintetis. Berikut adalah penjelasan lebih detail dari hasil classification report:
+Berdasarkan hasil evaluasi, model *RandomForestClassifier* mencapai akurasi sebesar 0.95 atau 95% pada data sintetis. Berikut adalah penjelasan lebih detail dari hasil classification report:
 
 - **Class 0** (label mayoritas):
   - **Precision**: 0.96, menunjukkan bahwa 96% dari prediksi untuk kelas ini benar.
@@ -296,7 +298,7 @@ Secara keseluruhan, model menunjukkan performa yang sangat baik dalam memprediks
 <figcaption>Gambar 2.1: Metrik evaluasi Logistic Regression dengan data asli.</figcaption>
 <br><br>
 
-Model **Random Forest** yang diuji sebelumnya menunjukkan hasil yang jauh lebih baik dengan akurasi sebesar 99.85% dan kinerja yang sangat baik pada kedua kelas, termasuk kelas minoritas. Sebaliknya, model **Logistic Regression** memiliki kelemahan yang cukup signifikan dalam mendeteksi kelas minoritas, yang terlihat dari rendahnya nilai recall (0.07) dan F1-score (0.12) pada kelas tersebut.
+Model *Logistic Regression* memiliki kelemahan yang cukup signifikan dalam mendeteksi kelas minoritas, yang terlihat dari rendahnya nilai recall (0.07) dan F1-score (0.12) pada kelas tersebut.
 
 Perbedaan utama antara kedua model ini adalah:
 - **Akurasi Keseluruhan**: Random Forest (99.85%) jauh lebih tinggi dibandingkan Logistic Regression (80%).
@@ -307,7 +309,7 @@ Perbedaan utama antara kedua model ini adalah:
 <figcaption>Gambar 2.2: Metrik evaluasi Logistic Regression dengan data sintetis.</figcaption>
 <br><br>
 
-Model **Logistic Regression** menghasilkan akurasi sebesar 0.80 atau 80% pada data sintetis. Berikut adalah ringkasan hasil evaluasi berdasarkan classification report:
+Model *Logistic Regression* menghasilkan akurasi sebesar 0.80 atau 80% pada data sintetis. Berikut adalah ringkasan hasil evaluasi berdasarkan classification report:
 
 - **Class 0** (label mayoritas):
   - **Precision**: 0.80, yang berarti 80% prediksi kelas 0 adalah benar.
@@ -323,25 +325,18 @@ Model **Logistic Regression** menghasilkan akurasi sebesar 0.80 atau 80% pada da
 
 - **Macro Average**: Rata-rata precision, recall, dan F1-score untuk kedua kelas adalah sekitar 0.48, 0.5, dan 0.45. Nilai ini menunjukkan bahwa kinerja pada kedua kelas, terutama kelas minoritas, masih rendah.
 
-- **Weighted Average**: Nilai rata-rata precision, recall, dan F1-score dengan mempertimbangkan proporsi masing-masing kelas adalah sekitar 0.67, 0.80, dan 0.71, yang menunjukkan performa yang lebih baik pada kelas mayoritas.
+- **Weighted Average**: Nilai rata-rata precision, recall, dan F1-score dengan mempertimbangkan proporsi masing-masing kelas adalah sekitar 0.67, 0.80, dan 0.71, yang menunjukkan performa yang lebih baik pada kelas mayoritas
 
-## Pemilihan Model Terbaik
-
-Dari hasil evaluasi, model terbaik dipilih berdasarkan akurasi dan metrik evaluasi seperti *Confusion Matrix*. *Random Forest* dipilih sebagai model terbaik karena memiliki performa yang lebih baik secara keseluruhan dibandingkan Logistic Regression dalam memprediksi data uji. Meskipun Logistic Regression lebih cepat, Random Forest menawarkan akurasi yang lebih tinggi dan stabilitas dalam pengambilan keputusan, menjadikannya pilihan yang lebih tepat untuk kebutuhan bisnis.
-
-## Evaluation
 Model *Random Forest* yang diuji pada data sintetis sebelumnya memberikan hasil yang jauh lebih baik, dengan akurasi sebesar 95% dan kinerja yang lebih seimbang pada kedua kelas, termasuk kelas minoritas. Perbedaan utama antara kedua model ini adalah:
 - Akurasi Keseluruhan: Random Forest (95%) lebih tinggi dibandingkan Logistic Regression (80%).
 - Kinerja pada Kelas Minoritas: Random Forest menunjukkan performa yang lebih baik dalam memprediksi kelas minoritas dibandingkan Logistic Regression, yang mengalami kesulitan dengan nilai recall yang rendah (0.18) pada kelas tersebut.
 - Performa: Random Forest memberikan hasil yang lebih andal dan seimbang untuk kedua kelas, sementara Logistic Regression cenderung bias terhadap kelas mayoritas.
 
-Secara keseluruhan, *Random Forest* menunjukkan kinerja yang lebih unggul pada data sintetis dibandingkan dengan *Logistic Regression*, terutama dalam menangani kelas minoritas. Berikut detail metrik evaluasi yang diperoleh model random forest:
 
+# <img src = "gambar/Conf synth RF.png"/>
+Berdasarkan hasil evaluasi, model terbaik dipilih berdasarkan akurasi dan metrik evaluasi *Confusion Matrix* dari data sintetis yang diasumsikan sebagai data baru. *Random Forest* dipilih sebagai model terbaik karena memiliki performa yang lebih baik secara keseluruhan dibandingkan Logistic Regression dalam memprediksi data uji, data latih dan data sintetis. Meskipun Logistic Regression lebih cepat, Random Forest menawarkan akurasi yang lebih tinggi dan stabilitas dalam pengambilan keputusan, menjadikannya pilihan yang lebih tepat untuk kebutuhan bisnis.
 
-
-### Kesimpulan
-
-# <img src = "gambar/Best_feature.png"/> <br>
+# <img src = "gambar/Best_feature.png"/>
 
 Berdasarkan grafik Feature Importances dari model Random Forest untuk memprediksi customer churn, dapat dijumpai beberapa hal penting tentang fitur-fitur yang paling mempengaruhi hasil prediksi:
 - Complain: Fitur ini memiliki pengaruh yang paling besar dalam memprediksi churn, dengan nilai penting yang jauh lebih tinggi dibandingkan fitur lainnya. Ini menunjukkan bahwa pelanggan yang memiliki keluhan (complain) memiliki kemungkinan yang lebih tinggi untuk churn (berhenti menggunakan layanan).
@@ -350,4 +345,3 @@ Berdasarkan grafik Feature Importances dari model Random Forest untuk memprediks
 - Fitur Lainnya: Sebagian besar fitur lainnya, seperti CreditScore, Geography, dan Gender, memiliki nilai penting yang jauh lebih kecil. Ini menunjukkan bahwa mereka tidak terlalu berpengaruh dalam model ini.
 
 Dari hasil yang telah diperoleh, dapat disimpulkan bahwa keluhan pelanggan (complain) merupakan indikator terkuat untuk churn, diikuti oleh umur dan jumlah produk yang dimiliki. Dengan demikian, jika perusahaan ingin mengurangi churn, fokus utama sebaiknya pada peningkatan layanan pelanggan dan penanganan keluhan. Menyediakan layanan yang lebih baik untuk kelompok umur tertentu atau produk tambahan yang relevan.
-
